@@ -1,13 +1,17 @@
 package playerEnum;
 
 public class Player {
+  private final int INITIAL_POINTS = 100;
+  private final byte INITIAL_AGE = 18;
+  private final byte MAX_CARDS = 2;
+
   private String name;
   private String surname;
   private float height;
   private float weight;
-  private byte age = 18;
+  private byte age = INITIAL_AGE;
   private Sex sex = Sex.NOTDEFINED;
-  private int points = 100;
+  private int points = INITIAL_POINTS;
   private Team team;
   private Position position;
   private boolean active = true;
@@ -19,9 +23,9 @@ public class Player {
     this.surname = surname;
     this.height = height;
     this.weight = weight;
-    this.age = age < 18 ? 18 : age;
+    this.age = age < INITIAL_AGE ? INITIAL_AGE : age;
     this.sex = sex;
-    this.points = points < 100 ? 100 : points;
+    this.points = points < INITIAL_POINTS ? INITIAL_POINTS : points;
     this.team = team;
     this.position = position;
     this.active = active;
@@ -60,7 +64,7 @@ public class Player {
    * @return true if the points are increased
    */
   public boolean increasePoints(int points) {
-    if (active && points > 0 && cards < 2) {
+    if (active && points > 0 && cards < MAX_CARDS) {
       this.points += points;
 
       return true;
@@ -77,7 +81,7 @@ public class Player {
    * @return true if the points are decreased
    */
   public boolean decreasePoints(int points) {
-    if (active && points > 0 && cards < 2) {
+    if (active && points > 0 && cards < MAX_CARDS) {
       this.points -= points;
 
       return true;
@@ -92,10 +96,10 @@ public class Player {
    * @return true if player get a new card
    */
   public boolean giveCard() {
-    if (active && cards < 2) {
+    if (active && cards < MAX_CARDS) {
       cards++;
 
-      if (cards >= 2) {
+      if (cards >= MAX_CARDS) {
         active = !active;
       }
 
